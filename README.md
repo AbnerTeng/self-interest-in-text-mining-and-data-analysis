@@ -9,4 +9,4 @@ Some small projects of text mining and data analysis / data science. Maybe some 
     3. Job description
 * Use wordcloud to display the importance of both hard skills and soft skills that a company emphasis on.
 
-[Reference:](https://maoviola.medium.com/a-complete-guide-to-web-scraping-linkedin-job-postings-ad290fcaa97f)
+[Reference](https://maoviola.medium.com/a-complete-guide-to-web-scraping-linkedin-job-postings-ad290fcaa97f)
