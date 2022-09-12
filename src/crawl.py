@@ -22,6 +22,7 @@ class linkedin_crwaler():
         )
         self.no_of_jobs = int(self.element.get_attribute("innerText"))
 
+        ## 以下操作是用於將網頁捲動到最下方，以便抓取所有的職缺資訊
         import tqdm
         i = 2
         for j in tqdm.tqdm(range(100)):
@@ -78,7 +79,7 @@ class linkedin_crwaler():
 
     def to_df(self):
         self.job_data = pd.DataFrame({"company name": self.company_name_list, "title": self.job_title_list, "description": self.job_descript})
-        self.job_data["description"] = self.job_data["description"].str.replace('\n', '')
+        self.job_data["description"] = self.job_data["description"].str.replace('\n', '') ## 將換行字元以空格取代
         self.job_data.to_excel("/Users/abnerteng/GitHub/self-interest-in-text-mining-and-data-analysis/datas/job_data.xlsx", index = False)
 
 
