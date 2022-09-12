@@ -9,10 +9,18 @@ import os
 import nltk.corpus
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+import os
+
 
 class word_cloud():
+    def load_data(self):
+        self.fwd = os.path.abspath(os.path.join(os.getcwd(), ".."))
+        self.file_path = self.fwd + "/datas/job_data.xlsx"
+        self.data = pd.read_excel(self.file_path)
+        return self.data
+
     def import_text(self):
-        self.text = "kklab, being a technology venture, collaborates with our partners to turn ideas into products using leading edge technologies. KKLab so far has two AI products to offer: KKRaaS and Lyricist.ai. KKRaaS is a B2B generic recommendation platform while Lyricist.ai is a lyrics generator. There are many more AI related projects in incubation.We are seeking a talented machine learning engineer to build audio/music AI systems. This role will be working with other machine learning engineers to develop algorithms ranging from audio/music analysis to audio/music generation. The algorithm has to strike a perfect balance between computation efficiency and model accuracy.We are looking for a candidate who is self-motivated with machine learning knowledge and passionate about engineering excellence.Responsibility Working with cross-country stakeholders and teams to build a music AI system.Understand, modify, and implement state-of-the-art technologies in audio/music analysis and generation from academia into products.Understand and breakdown state-of-the-art models into reusable components and develop new models by using those reusable components.Understand qualitative feedback from human labellers and translate it into quantitative metrics.Build simple prototypes and demo sites for newly developed models.RequirementSolid understanding of various machine learning models and techniques in audio/music analysis and generation.( eg. DDSP-VST, Magenta, etc )Fluent with Python.Familiar with popular machine learning frameworks such as tensorflow, pytorch, scikit, etc.Understanding of music theory is a plus.Professional experience in music (band member, music critic) is a plus.Fluent in Mandarin (interview will be conducted in Mandarin)Interview processHiring manager / 15~30m / phoneTeam, bar raiser / 60~90m / Google MeetGM, hiring manager / 60~90m / Google Meet"
+        self.text = self.data['description'][4]
         self.stop_words = set(stopwords.words('english'))
         self.token = word_tokenize(self.text)
 
@@ -41,10 +49,13 @@ class word_cloud():
         plt.imshow(self.wordcloud)
         plt.axis("off")
         plt.tight_layout(pad = 0)
+        plt.savefig(self.fwd + "/figs/graph4.png")
         plt.show()
+        
 
 if __name__ == '__main__':
     word_cloud = word_cloud()
+    word_cloud.load_data()
     word_cloud.import_text()
     word_cloud.frequency()
     word_cloud.draw_wordcloud()
